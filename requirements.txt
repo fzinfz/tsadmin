@@ -1,0 +1,8 @@
+django<1.12
+uwsgi
+django-registration-redux
+djangorestframework
+markdown
+django-filter
+django-bootstrap3
+
