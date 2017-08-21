@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'bootstrap3',
     'registration',
+    'markdownx',
     'connection.apps.ConnectionConfig',
     'django.contrib.admin',
     'django.contrib.auth',

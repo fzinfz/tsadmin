@@ -1,7 +1,7 @@
 # re-use models from: https://github.com/alishtory/xsadmin/blob/master/user/models.py
 # design changes:
 #    support multi methods on every node
-#    support multi protocal
+#    support multi protocols
 
 import random
 from django.db.utils import ProgrammingError
@@ -33,8 +33,6 @@ class User(AbstractUser):
     last_login_date = models.DateTimeField(verbose_name='上次登录时间',null=True,auto_now_add=True)
     this_login_ip = models.GenericIPAddressField(verbose_name='本次登录IP',unpack_ipv4=True,null=True)
     this_login_date = models.DateTimeField(verbose_name='本次登录时间',null=True,auto_now_add=True)
-
-
 
 
 class Node(models.Model):
@@ -100,3 +98,24 @@ class Connection(models.Model):
 
     def __str__(self):
         return '%s [%s: %s]'%(self.port,self.protocol, self.method)
+
+from markdownx.models import MarkdownxField
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode = True)
+    body = MarkdownxField()
+    status = models.CharField('文章状态', max_length=31, choices=(('PUBLISHED','已发布'),('DRAFT','草稿')), default='DRAFT')
+    content_type = models.CharField('内容类型', max_length=31, choices=(('ANNOUNCE', '站内通告'), ('PAGE','页面'), ('OTHER', '其他类型')), default= 'ANNOUNCE')
+    topped = models.BooleanField('置顶', default=False)
+    created_time = models.DateTimeField('创建时间',auto_now_add=True)
+    last_modified_time = models.DateTimeField('修改时间',auto_now=True)
+
+    def __str__(self):
+        return '%s [%s]'%(self.title, self.get_status_display())
+
+    class Meta:
+        verbose_name = '文章内容'
+        verbose_name_plural = verbose_name
+        ordering = ['-topped','-last_modified_time']
+

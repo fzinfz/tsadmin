@@ -39,5 +39,6 @@ urlpatterns = [
     url(r'^admin/',
         include(admin.site.urls),
         name='admin'),
-
+    
+    url(r'^markdownx/', include('markdownx.urls')),
 ]
