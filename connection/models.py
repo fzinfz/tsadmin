@@ -4,7 +4,7 @@ import random
 from django.db.utils import ProgrammingError
 
  # re-use models from: https://github.com/alishtory/xsadmin/blob/master/user/models.py
- # main changes:
+ # design changes:
  #    support multi methods on every node
  #    support multi protocal
 
@@ -39,7 +39,7 @@ class Connection(models.Model):
     PROTOCOLS = (
         ('ss', 'Shadowsocks'),
         ('ssr', 'ShadowsocksR'),
-        ('v2ray', 'V2Ray'),
+        ('vmess', 'V2Ray'),
     )
     protocol = models.CharField(choices=PROTOCOLS, max_length=63, default='ss', verbose_name='协议')
 
@@ -53,15 +53,16 @@ class Connection(models.Model):
         ('rc4', 'rc4'),
         ('table', 'table'),
     )
+
     method = models.CharField(choices=METHOD_CHOICES,max_length=63, default='aes-256-cfb', verbose_name='加密方式')
 
     def get_usefull_port():
         try:
-            max_port = Connection   .objects.aggregate(Max('port')).get('port__max')
+            max_port = Connection.objects.aggregate(Max('port')).get('port__max')
         except ProgrammingError:
             max_port = None
         if not max_port:
-            max_port = 4466
+            max_port = 4455
         new_port = int(max_port) + 1
         return new_port
 
@@ -69,6 +70,7 @@ class Connection(models.Model):
 
     def gen_passwd():
         return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',10))
+
     passwd = models.CharField(verbose_name='端口密码',max_length=16,default=gen_passwd)
 
     class Meta:
@@ -77,5 +79,5 @@ class Connection(models.Model):
         ordering = ['port', 'id']
 
     def __str__(self):
-        return '%s [%s]'%(self.port,self.method)
+        return '%s [%s: %s]'%(self.port,self.protocol, self.method)
 
