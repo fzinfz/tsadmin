@@ -70,12 +70,12 @@ class Accessories(models.Model):
     value = models.CharField(verbose_name='值', max_length=200)
 
     def __str__(self):
-        return '%s: %s' % (self.catalog, self.value)
+#        return '%s: %s' % (self.catalog, self.value)
+        return self.value
 
     class Meta:
         verbose_name = '参数清单'
         verbose_name_plural = verbose_name
-        ordering = ['-catalog']
 
 
 class Connection(models.Model):
@@ -90,7 +90,7 @@ class Connection(models.Model):
         Accessories,
         limit_choices_to={'catalog': 'protocol'},
         related_name='protocols',
-        default=1, # pk in /db_init.json
+        default=1, # pk in /init_db.json
         on_delete=models.CASCADE,
         verbose_name="协议"
     )
@@ -99,7 +99,7 @@ class Connection(models.Model):
         Accessories,
         limit_choices_to={'catalog': 'method'},
         related_name='methods',
-        default=100, # pk in /db_init.json
+        default=100, # pk in /init_db.json
         on_delete=models.CASCADE,
         verbose_name="加密方式"
     )
@@ -110,7 +110,6 @@ class Connection(models.Model):
     class Meta:
         verbose_name = '连接'
         verbose_name_plural = verbose_name
-        ordering = ['port', 'id']
 
     def __str__(self):
         return '%s [%s: %s]' % (self.port, self.protocol, self.method)

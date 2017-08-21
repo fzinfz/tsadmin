@@ -135,10 +135,11 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale/')]
 AUTH_USER_MODEL = 'connection.User'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'connection.views.PageNumberPaginationDataOnly',
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAdminUser',
     ],
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 100
 }
 
 DB_ACCESSORIES_CATALOGS = (

@@ -1,7 +1,12 @@
 from rest_framework import viewsets
-from connection.models import Connection, Accessories
 from .serializers import *
-from rest_framework import generics, filters
+from rest_framework import filters
+
+
+class AccessoriesViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Accessories.objects.all()
+    serializer_class = AccessoriesSerializer
+
 
 class ConnectionViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -11,11 +16,11 @@ class ConnectionViewSet(viewsets.ReadOnlyModelViewSet):
 
     Examples:
 
-    GET [/api/connection/?protocol=ss](/api/connection/?protocol=ss)
+    GET [/api/connection/?protocol=1](/api/connection/?protocol=1)
 
-    GET [/api/connection/?protocol=ss&format=json](/api/connection/?protocol=ss&format=json)
+    GET [/api/connection/?protocol=1&format=json](/api/connection/?protocol=1&format=json)
     """
-    queryset = Connection.objects.all().order_by('id')
+    queryset = Connection.objects.all()
     serializer_class = ConnectionSerializer
 
     filter_backends = (filters.DjangoFilterBackend, )
