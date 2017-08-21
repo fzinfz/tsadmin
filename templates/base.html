@@ -1,12 +1,13 @@
+{% extends 'bootstrap3/bootstrap3.html' %}
+
 {% load i18n %}
-<!doctype html>
-<html lang="en">
+{% load bootstrap3 %}
 
-<head>
-    <title>Django Registration Test App</title>
-</head>
+{% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
 
-<body>
+{% block bootstrap3_content %}
+
+<div class="container-fluid">
     <div id="header">
     {% block header %}
     <a href="{% url 'index' %}">{% trans "Home" %}</a> |
@@ -21,8 +22,9 @@
     {% endblock %}
     </div>
 
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
     <div id="content">
-    <h1>{% block title %}{% endblock %}</h1>
     {% block content %}
 
     {% endblock content %}
@@ -33,6 +35,5 @@
 
     {% endblock %}
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}
