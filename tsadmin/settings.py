@@ -129,3 +129,4 @@ from django.utils.translation import gettext_lazy as _
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale/')]
 
+AUTH_USER_MODEL = 'connection.User'

@@ -1,12 +1,41 @@
-from django.db import models
-from django.db.models import Max
+# re-use models from: https://github.com/alishtory/xsadmin/blob/master/user/models.py
+# design changes:
+#    support multi methods on every node
+#    support multi protocal
+
 import random
 from django.db.utils import ProgrammingError
+from django.db.models import Max
 
- # re-use models from: https://github.com/alishtory/xsadmin/blob/master/user/models.py
- # design changes:
- #    support multi methods on every node
- #    support multi protocal
+
+def gen_passwd():
+    return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 10))
+
+def get_usefull_port():
+    try:
+        max_port = Connection.objects.aggregate(Max('port')).get('port__max')
+    except ProgrammingError:
+        max_port = None
+    if not max_port:
+        max_port = 4455
+    new_port = int(max_port) + 1
+    return new_port
+
+
+from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    reg_ip = models.GenericIPAddressField(verbose_name='注册IP',unpack_ipv4=True,null=True)
+    last_login_ip = models.GenericIPAddressField(verbose_name='上次登录IP',unpack_ipv4=True,null=True)
+    last_login_date = models.DateTimeField(verbose_name='上次登录时间',null=True,auto_now_add=True)
+    this_login_ip = models.GenericIPAddressField(verbose_name='本次登录IP',unpack_ipv4=True,null=True)
+    this_login_date = models.DateTimeField(verbose_name='本次登录时间',null=True,auto_now_add=True)
+
+
+
 
 class Node(models.Model):
     STATUS_CHOICES = (
@@ -36,8 +65,14 @@ class Node(models.Model):
 
 
 class Connection(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        default=1, verbose_name='用户'
+    )
+
     PROTOCOLS = (
-        ('ss', 'Shadowsocks'),
+        ('ss', 'Shadows'),
         ('ssr', 'ShadowsocksR'),
         ('vmess', 'V2Ray'),
     )
@@ -55,22 +90,7 @@ class Connection(models.Model):
     )
 
     method = models.CharField(choices=METHOD_CHOICES,max_length=63, default='aes-256-cfb', verbose_name='加密方式')
-
-    def get_usefull_port():
-        try:
-            max_port = Connection.objects.aggregate(Max('port')).get('port__max')
-        except ProgrammingError:
-            max_port = None
-        if not max_port:
-            max_port = 4455
-        new_port = int(max_port) + 1
-        return new_port
-
-    port = models.PositiveSmallIntegerField(verbose_name='端口', blank=True, default=get_usefull_port)
-
-    def gen_passwd():
-        return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',10))
-
+    port = models.PositiveSmallIntegerField(verbose_name='端口', default=get_usefull_port)
     passwd = models.CharField(verbose_name='端口密码',max_length=16,default=gen_passwd)
 
     class Meta:
@@ -80,4 +100,3 @@ class Connection(models.Model):
 
     def __str__(self):
         return '%s [%s: %s]'%(self.port,self.protocol, self.method)
-
