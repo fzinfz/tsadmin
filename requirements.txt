@@ -3,4 +3,4 @@ uwsgi
 django-registration-redux
 django-bootstrap3
 django-markdownx
-
+mistune
