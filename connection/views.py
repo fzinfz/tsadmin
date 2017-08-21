@@ -1,3 +1,16 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from .models import *
+
+class PostPublicListView(ListView):
+    model = Post
+    paginate_by = 10
+    template_name ='index.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status__iexact='PUBLISHED', public=True)
+        return queryset
+
+class PostDetailView(DetailView):
+    model = Post

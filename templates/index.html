@@ -4,4 +4,13 @@
 {% block title %}tsadmin{% endblock %}
 
 {% block content %}
+
+{% for article in object_list %}
+    <li>
+        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a> - {{ article.last_modified_time|date }}
+        <a href="{{ article.get_slug_url }}" target="_blank">(新窗口) </a>
+
+    </li>
+{% endfor %}
+
 {% endblock %}

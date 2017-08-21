@@ -100,14 +100,15 @@ class Connection(models.Model):
         return '%s [%s: %s]'%(self.port,self.protocol, self.method)
 
 from markdownx.models import MarkdownxField
+from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True, allow_unicode = True)
     body = MarkdownxField()
     status = models.CharField('文章状态', max_length=31, choices=(('PUBLISHED','已发布'),('DRAFT','草稿')), default='DRAFT')
-    content_type = models.CharField('内容类型', max_length=31, choices=(('ANNOUNCE', '站内通告'), ('PAGE','页面'), ('OTHER', '其他类型')), default= 'ANNOUNCE')
     topped = models.BooleanField('置顶', default=False)
+    public = models.BooleanField('公开', default=False)
     created_time = models.DateTimeField('创建时间',auto_now_add=True)
     last_modified_time = models.DateTimeField('修改时间',auto_now=True)
 
@@ -118,4 +119,10 @@ class Post(models.Model):
         verbose_name = '文章内容'
         verbose_name_plural = verbose_name
         ordering = ['-topped','-last_modified_time']
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'pk': self.pk})
+
+    def get_slug_url(self):
+        return reverse('post_detail_slug', kwargs={'slug': self.slug})
 

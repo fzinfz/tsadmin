@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{object.title}}{% endblock %}
+
+{% block content %}
+<h1>{{object.title}}</h1>
+<p>{{ object.body }}</p> 
+
+{% endblock %}
