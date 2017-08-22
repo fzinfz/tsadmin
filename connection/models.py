@@ -86,8 +86,8 @@ class Connection(models.Model):
         ('rc4', 'rc4'),
         ('table', 'table'),
     )
-
     method = models.CharField(choices=METHOD_CHOICES,max_length=63, default='aes-256-cfb', verbose_name='加密方式')
+
     port = models.PositiveSmallIntegerField(verbose_name='端口', default=get_usefull_port)
     passwd = models.CharField(verbose_name='端口密码',max_length=16,default=gen_passwd)
 

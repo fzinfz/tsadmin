@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'bootstrap3',
     'registration',
     'markdownx',
+    'rest_framework',
+    'django_filters',
     'connection.apps.ConnectionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,3 +133,10 @@ from django.utils.translation import gettext_lazy as _
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale/')]
 
 AUTH_USER_MODEL = 'connection.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}

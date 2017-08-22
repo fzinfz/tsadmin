@@ -22,28 +22,18 @@ from connection.views import PostPublicListView,PostDetailView
 
 urlpatterns = [
 
-    url(r'^$',
-#        TemplateView.as_view(template_name='index.html'),
-        PostPublicListView.as_view(),
-        name='index'),
+    url(r'^$', PostPublicListView.as_view(), name='index'),
 
     url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post_detail_slug'),
     url(r'^p/(?P<pk>\d+)/$', PostDetailView.as_view(), name='post_detail'),
 
-    url(r'^accounts/',
-        include('registration.backends.simple.urls')),
-
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^login/', auth_views.login, name='login'),
     url(r'^accounts/profile/',
         TemplateView.as_view(template_name='profile.html'),
         name='profile'),
 
-    url(r'^login/',
-        auth_views.login,
-        name='login'),
-
-    url(r'^admin/',
-        include(admin.site.urls),
-        name='admin'),
-
+    url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^markdownx/', include('markdownx.urls')),
+    url(r'^api/', include('api.urls')),
 ]
