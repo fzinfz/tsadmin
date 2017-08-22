@@ -140,3 +140,9 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
+
+DB_ACCESSORIES_CATALOGS = (
+    ('method', '加密方式'),
+    ('protocol', '协议'),
+)
+

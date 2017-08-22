@@ -1,0 +1,68 @@
+[
+{
+  "model": "connection.node",
+  "pk": 1,
+  "fields": {
+    "domain_name": "example.com",
+    "location": "US",
+    "status": "INIT",
+    "traffic_rate": 100,
+    "sort": 0,
+    "remark_for_admin": ""
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 101,
+  "fields": {
+    "catalog": "method",
+    "value": "aes-256-cfb"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 102,
+  "fields": {
+    "catalog": "method",
+    "value": "chacha20"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 1,
+  "fields": {
+    "catalog": "protocol",
+    "value": "Shadowsocks"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 2,
+  "fields": {
+    "catalog": "protocol",
+    "value": "ShadowsocksR"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 3,
+  "fields": {
+    "catalog": "protocol",
+    "value": "VMess"
+  }
+},
+{
+  "model": "connection.post",
+  "pk": 1,
+  "fields": {
+    "title": "\u5173\u4e8e\u672c\u7ad9",
+    "slug": "\u5173\u4e8e\u672c\u7ad9",
+    "body": "### \u6b22\u8fce\r\n\u8fd9\u662f\u4e2a\u79c1\u4eba\u7ad9\u70b9",
+    "status": "PUBLISHED",
+    "topped": false,
+    "public": true,
+    "created_time": "2017-08-22T06:57:08.421Z",
+    "last_modified_time": "2017-08-22T06:57:08.421Z"
+  }
+}
+]

@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from connection.models import Connection
-from .serializers import ConnectionSerializer
+from connection.models import Connection, Accessories
+from .serializers import *
 from rest_framework import generics, filters
 
 class ConnectionViewSet(viewsets.ReadOnlyModelViewSet):

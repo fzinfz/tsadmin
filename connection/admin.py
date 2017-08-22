@@ -15,5 +15,5 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Node)
 admin.site.register(Connection)
-#admin.site.register(Post, MarkdownxModelAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Accessories)
