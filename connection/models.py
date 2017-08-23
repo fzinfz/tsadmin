@@ -65,7 +65,12 @@ class Node(models.Model):
         return '%s [%s]' % (self.domain_name, self.location)
 
 
+def get_accessories_id():
+    max_id = Accessories.objects.aggregate(Max('id')).get('id__max') + 1
+    return int(max_id) + 1
+
 class Accessories(models.Model):
+    id = models.IntegerField(primary_key=True, default=get_accessories_id, verbose_name='主键/排序')
     catalog = models.CharField(verbose_name='分类', choices=settings.DB_ACCESSORIES_CATALOGS, max_length=32)
     value = models.CharField(verbose_name='值', max_length=200)
 

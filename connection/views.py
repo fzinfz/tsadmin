@@ -2,6 +2,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 class PageNumberPaginationDataOnly(PageNumberPagination):
+    """
+    This model is for api. It's placed here because DEFAULT_PAGINATION_CLASS can't be correctly loaded.
+    """
     def get_paginated_response(self, data):
         return Response(data)
 

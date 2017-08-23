@@ -7,7 +7,8 @@ from markdownx.widgets import AdminMarkdownxWidget
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-
+    list_display = ['title', 'public', 'status', 'topped']
+    list_filter = ('public', 'status')
     formfield_overrides = {
         models.TextField: {'widget': AdminMarkdownxWidget},
     }
@@ -16,7 +17,8 @@ class PostAdmin(admin.ModelAdmin):
 class AccessoriesAdmin(admin.ModelAdmin):
     list_display = ['value', 'catalog']
     list_filter = ('catalog',)
-    ordering = ['catalog', 'id']
+    ordering = ['id']
+
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Node)

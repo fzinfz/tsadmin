@@ -3,37 +3,82 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
+{% block bootstrap3_title %}
+    {% block title %}{% endblock %}
+{% endblock %}
 
 {% block bootstrap3_content %}
 
-<div class="container-fluid">
-    <div id="header">
-    {% block header %}
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> |
+    <nav class="navbar navbar-default">
 
-    {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }}
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> |
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
-    {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log In" %}</a>
-    {% endif %}
-    {% endblock %}
-    </div>
+        <div class="container-fluid">
+            {% block header %}
 
-    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navbarCollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{% url 'index' %}" class="navbar-brand">{% trans "Home" %}</a>
+                    {% if user.is_authenticated %}
+                        <p class="navbar-text"><a href="{% url 'profile' %}" class="navbar-link">用户信息</a></p>
 
-    <div id="content">
-    {% block content %}
+                    {% endif %}
+                </div>
 
-    {% endblock content %}
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="nav navbar-nav">
+                        {% if user.is_staff %}
+                            <li><a href="{% url 'admin:index' %}" target="_blank">后台管理</a></li>
+                            <li><a href="/api" target="_blank">API</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        {% if user.is_authenticated %}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    {% trans "Logged in" %}: {{ user.username }}
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a></li>
+                                    <li><a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        {% else %}
+
+                            <li><a href="{% url 'auth_login' %}">{% trans "Log In" %}</a></li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endblock %}
+
+            {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+        </div>
+    </nav>
+
+    <div id="content" class="">
+
+            {% block content %}
+
+            {% endblock content %}
+
     </div>
 
     <div id="footer">
-    {% block footer %}
+        {% block footer %}
 
-    {% endblock %}
+        {% endblock %}
     </div>
-</div>
+    </div>
 {% endblock %}
