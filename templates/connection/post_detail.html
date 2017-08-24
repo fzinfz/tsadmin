@@ -2,10 +2,15 @@
 {% load i18n %}
 {% load markdownify %}
 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
 {% block title %}{{object.title}}{% endblock %}
 
 {% block content %}
-<h1>{{object.title}}</h1>
-{{ object.body | markdown | safe }} 
-
+    <div class="container">
+        <h1>{{object.title}}</h1>
+        <small>{{ object.last_modified_time }}</small>
+        {{ object.body | markdown | safe }}
+</div>
 {% endblock %}

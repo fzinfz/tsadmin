@@ -3,7 +3,24 @@
 {% block title %}用户信息{% endblock %}
 
 {% block content %}
+    <div class="container">
 
-<a href="{% url 'profile' %}">Test</a>
+        <div class="panel-group" id="accordion">
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title panel-info">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Server 1</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        URI & Qcode here
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

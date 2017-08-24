@@ -7,6 +7,11 @@
     {% block title %}{% endblock %}
 {% endblock %}
 
+{% block bootstrap3_extra_head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+{% endblock %}
+
 {% block bootstrap3_content %}
 
     <nav class="navbar navbar-default">
@@ -15,17 +20,30 @@
             {% block header %}
 
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#navbarCollapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="{% url 'index' %}" class="navbar-brand">{% trans "Home" %}</a>
-                    {% if user.is_authenticated %}
-                        <p class="navbar-text"><a href="{% url 'profile' %}" class="navbar-link">用户信息</a></p>
 
+
+                    <a href="{% url 'index' %}" class="navbar-brand">{% trans "Home" %}</a>
+
+                    {% if user.is_authenticated %}
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navbarCollapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <p class="navbar-text">
+                            <a href="{% url 'profile' %}" class="navbar-link">用户信息</a>
+                        </p>
+
+                    {% else %}
+                        <a href="{% url 'registration_register' %}" class="btn navbar-btn">
+                            {% trans "Register" %}
+                        </a>
+                        <a href="{% url 'auth_login' %}" class="btn navbar-btn">
+                            {% trans "Log In" %}
+                        </a>
                     {% endif %}
                 </div>
 
@@ -38,9 +56,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-
                         {% if user.is_authenticated %}
-
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
@@ -52,11 +68,6 @@
                                     </li>
                                 </ul>
                             </li>
-
-                        {% else %}
-
-                            <li><a href="{% url 'auth_login' %}">{% trans "Log In" %}</a></li>
-
                         {% endif %}
                     </ul>
                 </div>
@@ -68,17 +79,13 @@
     </nav>
 
     <div id="content" class="">
-
-            {% block content %}
-
-            {% endblock content %}
-
+        {% block content %}
+        {% endblock content %}
     </div>
 
     <div id="footer">
         {% block footer %}
-
         {% endblock %}
     </div>
-    </div>
+
 {% endblock %}
