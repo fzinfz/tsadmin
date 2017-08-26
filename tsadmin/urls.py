@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
-from connection.views import PostPublicListView,PostDetailView
+from connection.views import PostPublicListView,PostDetailView,NodeListView
+from django.conf import settings
 
 urlpatterns = [
 
@@ -29,9 +30,7 @@ urlpatterns = [
 
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^login/', auth_views.login, name='login'),
-    url(r'^accounts/profile/',
-        TemplateView.as_view(template_name='profile.html'),
-        name='profile'),
+    url(r'^accounts/profile/', NodeListView.as_view(), name='profile'),
 
     url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^markdownx/', include('markdownx.urls')),

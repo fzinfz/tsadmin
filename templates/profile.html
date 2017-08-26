@@ -1,26 +1,42 @@
 {% extends "base.html" %}
+{% load conn %}
+{% load qr_code %}
+{% load markdownify %}
 
 {% block title %}用户信息{% endblock %}
 
 {% block content %}
     <div class="container">
-
+        {{ introduction | markdown | safe }}
         <div class="panel-group" id="accordion">
+            {% for node in object_list %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title panel-info">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+                                {{ node.domain_name }} - {{ node.location }} [{{ node.get_status_display }}]
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ forloop.counter }}"
+                         class="panel-collapse collapse {% if forloop.first %} in {% endif %} ">
+                        <div class="panel-body">
+                            <p>{{ node | ss_qrcode:user.id }}</p>
+                            {% with s=node|ss_qrcode:user.id %}
+                                {% qr_from_text s size="m" %}
+                            {% endwith %}
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title panel-info">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            Server 1</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        URI & Qcode here
+                            <p>
+                                <button data-toggle="collapse" data-target="#more{{ forloop.counter }}">More</button>
+                            </p>
+
+                            <div id="more{{ forloop.counter }}" class="collapse">
+                                {{ node | get_protocol:user.id }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

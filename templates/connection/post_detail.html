@@ -3,14 +3,14 @@
 {% load markdownify %}
 
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
 
-{% block title %}{{object.title}}{% endblock %}
+{% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        <h1>{{object.title}}</h1>
+        <h1>{{ object.title }}</h1>
         <small>{{ object.last_modified_time }}</small>
         {{ object.body | markdown | safe }}
-</div>
+    </div>
 {% endblock %}

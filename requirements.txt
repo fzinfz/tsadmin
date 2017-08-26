@@ -6,3 +6,5 @@ django-markdownx
 mistune
 djangorestframework
 django-filter
+django-qr-code
+pillow
