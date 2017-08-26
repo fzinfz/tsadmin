@@ -1,41 +1,70 @@
 {% extends "base.html" %}
-{% load conn %}
 {% load qr_code %}
 {% load markdownify %}
+
+{% load mytags %}
 
 {% block title %}用户信息{% endblock %}
 
 {% block content %}
+
     <div class="container">
-        {{ introduction | markdown | safe }}
-        <div class="panel-group" id="accordion">
-            {% for node in object_list %}
+        {% non_public_posts as posts %}
+        <div class="panel-group" id="accordion-posts">
+            {% for post in posts %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title panel-info">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
-                                {{ node.domain_name }} - {{ node.location }} [{{ node.get_status_display }}]
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion-posts" href="#post{{ forloop.counter }}">
+                                {{ post.title }}
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse{{ forloop.counter }}"
+                    <div id="post{{ forloop.counter }}"
                          class="panel-collapse collapse {% if forloop.first %} in {% endif %} ">
                         <div class="panel-body">
-                            <p>{{ node | ss_qrcode:user.id }}</p>
-                            {% with s=node|ss_qrcode:user.id %}
-                                {% qr_from_text s size="m" %}
-                            {% endwith %}
-
-                            <p>
-                                <button data-toggle="collapse" data-target="#more{{ forloop.counter }}">More</button>
-                            </p>
-
-                            <div id="more{{ forloop.counter }}" class="collapse">
-                                {{ node | get_protocol:user.id }}
-                            </div>
+                            {{ post.body | markdown | safe }}
                         </div>
                     </div>
                 </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="panel-group" id="accordion-conn">
+            {% for node in object_list %}
+                {% user_conn_list as user_connnections %}
+                {% for conn in user_connnections %}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-conn"
+                                   href="#conn{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                                    {{ node.domain_name }} - {{ node.location }} [{{ node.get_status_display }}]
+                                    {% if user_connnections.count > 1 %} {{ conn }} {% endif %}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="conn{{ forloop.parentloop.counter }}{{ forloop.counter }}"
+                             class="panel-collapse collapse {% if forloop.first and forloop.parentloop.first %} in {% endif %} ">
+                            <div class="panel-body">
+                                <p>{{ node | ss_qrcode:conn }}</p>
+                                {% with s=node|ss_qrcode:conn %}
+                                    {% qr_from_text s size="m" %}
+                                {% endwith %}
+
+                                <p>
+                                    <button data-toggle="collapse" data-target="#more{{ forloop.parentloop.counter }}{{ forloop.counter }}">More
+                                    </button>
+                                </p>
+
+                                <div id="more{{ forloop.parentloop.counter }}{{ forloop.counter }}" class="collapse">
+                                    {{ node | get_protocol:conn }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>

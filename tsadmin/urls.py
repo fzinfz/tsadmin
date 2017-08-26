@@ -18,15 +18,15 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
-from connection.views import PostPublicListView,PostDetailView,NodeListView
+from connection.views import PostPublicListView,PostPublicDetailView,NodeListView
 from django.conf import settings
 
 urlpatterns = [
 
     url(r'^$', PostPublicListView.as_view(), name='index'),
 
-    url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post_detail_slug'),
-    url(r'^p/(?P<pk>\d+)/$', PostDetailView.as_view(), name='post_detail'),
+    url(r'^post/(?P<slug>[-\w]+)/$', PostPublicDetailView.as_view(), name='post_detail_slug'),
+    url(r'^p/(?P<pk>\d+)/$', PostPublicDetailView.as_view(), name='post_detail'),
 
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^login/', auth_views.login, name='login'),

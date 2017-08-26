@@ -25,14 +25,15 @@ class PostPublicListView(ListView):
         return queryset
 
 
-class PostDetailView(DetailView):
+class PostPublicDetailView(DetailView):
     model = Post
 
     def get_queryset(self):
         return super().get_queryset().filter(public=True)
 
-import base64
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class NodeListView(LoginRequiredMixin, ListView):
     model = Node

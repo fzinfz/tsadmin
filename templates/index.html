@@ -5,16 +5,16 @@
 
 {% block content %}
     <div class="panel panel-default">
-        {% for article in object_list %}
-                <div class="panel-heading">
-                    <h1><a href="{{ article.get_absolute_url }}">
-                        {{ article.title }}
-                    </a></h1>
-                    <small>
-                        {{ article.last_modified_time|date }}
-                        (<a href="{{ article.get_slug_url }}" target="_blank">新窗口打开</a>)
-                    </small>
-                </div>
+        {% for post in object_list %}
+            <div class="panel-heading">
+                <h1><a href="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                </a></h1>
+                <small>
+                    {{ post.last_modified_time|date }}
+                    (<a href="{{ post.get_slug_url }}" target="_blank">新窗口打开</a>)
+                </small>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
