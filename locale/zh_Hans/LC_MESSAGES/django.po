@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-20 20:25+0800\n"
+"POT-Creation-Date: 2017-08-24 22:09+0800\n"
 "PO-Revision-Date: 2008-03-20 23:22+0800\n"
 "Last-Translator: fzinfz <fzinfz@gmail.com>\n"
 "Language-Team: LANGUAGE\n"
@@ -16,430 +16,150 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:26
-msgid "Activate users"
-msgstr ""
+#: templates/base.html:25 templates/rest_framework/api.html:7
+msgid "Home"
+msgstr "首页"
 
-#: admin.py:44
-#, fuzzy
-#| msgid "activation key"
+#: templates/base.html:37
+msgid "User Info"
+msgstr "用户信息"
+
+#: templates/base.html:43 templates/registration/login.html:26
+#: templates/registration/registration_form.html:15
+msgid "Register"
+msgstr "注册"
+
+#: templates/base.html:46
+msgid "Log In"
+msgstr "登录"
+
+msgid "registration profile"
+msgstr "注册信息"
+
+msgid "Site administration"
+msgstr "站点管理"
+
+#: templates/base.html:66
+msgid "Logged in"
+msgstr "已登录"
+
+#: templates/base.html:69
+msgid "Log out"
+msgstr "退出"
+
+#: templates/base.html:70
+msgid "Change password"
+msgstr "修改密码"
+
+#: templates/registration/login.html:6 templates/registration/login.html:18
+msgid "Log in"
+msgstr "登录"
+
+#: templates/registration/login.html:25
+msgid "Not a member?"
+msgstr "没有帐号？"
+
+#: templates/registration/login.html:31
+msgid "Forgot your password?"
+msgstr "忘记密码？"
+
+#: templates/registration/login.html:32
+msgid "Reset it"
+msgstr "重置"
+
+#: templates/registration/registration_form.html:6
+msgid "Register for an account"
+msgstr "注册帐号"
+
 msgid "Re-send activation emails"
-msgstr "激活密钥"
+msgstr "重新发送激活邮件"
 
-#: forms.py:36 forms.py:114
 msgid "E-mail"
 msgstr "电子邮箱"
 
-#: forms.py:52
-msgid "A user with that username already exists."
-msgstr ""
-
-#: forms.py:64
 msgid "I have read and agree to the Terms of Service"
 msgstr "我已阅读并同意该服务条款"
 
-#: forms.py:65
 msgid "You must agree to the terms to register"
 msgstr "您必须同意注册条款"
 
-#: forms.py:81
 msgid ""
-"This email address is already in use. Please supply a different email "
-"address."
+ "This email address is already in use. Please supply a different email "
+ "address."
 msgstr "该 Email 地址已有人使用，请提供一个另外的 Email 地址。"
 
-#: forms.py:108
 msgid ""
 "Registration using free email addresses is prohibited. Please supply a "
 "different email address."
 msgstr "禁止使用免费 Email 地址注册，请提供一个另外的 Email 地址。"
 
-#: models.py:271
 msgid "user"
 msgstr "用户"
 
-#: models.py:273
 msgid "activation key"
 msgstr "激活密钥"
 
-#: models.py:279
-msgid "registration profile"
-msgstr "注册信息"
-
-#: models.py:280
 msgid "registration profiles"
 msgstr "注册信息"
 
-#: templates/registration/activate.html:4
-#, fuzzy
-#| msgid "activation key"
 msgid "Activation Failure"
-msgstr "激活密钥"
+msgstr "激活失败"
 
-#: templates/registration/activate.html:7
-#, fuzzy
-#| msgid "activation key"
 msgid "Account activation failed."
-msgstr "激活密钥"
+msgstr "账户激活失败"
 
-#: templates/registration/activation_complete.html:4
-#: templates/registration/activation_complete_admin_pending.html:4
-msgid "Account Activated"
-msgstr ""
-
-#: templates/registration/activation_complete.html:8
-#: templates/registration/activation_complete_admin_pending.html:8
-msgid "Your account is now activated."
-msgstr ""
-
-#: templates/registration/activation_complete.html:10
-msgid "You can log in."
-msgstr ""
-
-#: templates/registration/activation_complete_admin_pending.html:10
-msgid "Once a site administrator activates your account you can login."
-msgstr ""
-
-#: templates/registration/activation_email.html:6
-#: templates/registration/admin_approve_email.html:6
-#, fuzzy
-#| msgid "registration profile"
-msgid "registration"
-msgstr "注册信息"
-
-#: templates/registration/activation_email.html:11
-#, python-format
-msgid ""
-"\n"
-"    You (or someone pretending to be you) have asked to register an account "
-"at\n"
-"    %(site_name)s.  If this wasn't you, please ignore this email\n"
-"    and your address will be removed from our records.\n"
-"    "
-msgstr ""
-
-#: templates/registration/activation_email.html:18
-#, python-format
-msgid ""
-"\n"
-"    To activate this account, please click the following link within the "
-"next\n"
-"    %(expiration_days)s days:\n"
-"    "
-msgstr ""
-
-#: templates/registration/activation_email.html:30
-#: templates/registration/admin_approve_email.html:23
-#, python-format
-msgid ""
-"\n"
-"    Sincerely,\n"
-"    %(site_name)s Management\n"
-"    "
-msgstr ""
-
-#: templates/registration/activation_email.txt:2
-#, python-format
-msgid ""
-"\n"
-"You (or someone pretending to be you) have asked to register an account at\n"
-"%(site_name)s.  If this wasn't you, please ignore this email\n"
-"and your address will be removed from our records.\n"
-msgstr ""
-
-#: templates/registration/activation_email.txt:7
-#, python-format
-msgid ""
-"\n"
-"To activate this account, please click the following link within the next\n"
-"%(expiration_days)s days:\n"
-msgstr ""
-
-#: templates/registration/activation_email.txt:14
-#, python-format
-msgid ""
-"\n"
-"Sincerely,\n"
-"%(site_name)s Management\n"
-msgstr ""
-
-#: templates/registration/activation_email_subject.txt:1
-#: templates/registration/admin_approve_complete_email_subject.txt:1
-#, fuzzy
-#| msgid "activation key"
-msgid "Account activation on"
-msgstr "激活密钥"
-
-#: templates/registration/admin_approve.html:4
-msgid "Approval Failure"
-msgstr ""
-
-#: templates/registration/admin_approve.html:7
-msgid "Account Approval failed."
-msgstr ""
-
-#: templates/registration/admin_approve_complete.html:4
-msgid "Account Approved"
-msgstr ""
-
-#: templates/registration/admin_approve_complete.html:8
-msgid "The user's account is now approved."
-msgstr ""
-
-#: templates/registration/admin_approve_complete_email.html:6
-msgid "admin approval"
-msgstr ""
-
-#: templates/registration/admin_approve_complete_email.html:11
-msgid ""
-"\n"
-"    Your account is now approved. You can \n"
-"    "
-msgstr ""
-
-#: templates/registration/admin_approve_complete_email.html:14
-msgid "log in."
-msgstr ""
-
-#: templates/registration/admin_approve_complete_email.txt:2
-msgid ""
-"\n"
-"Your account is now approved. You can log in using the following link\n"
-msgstr ""
-
-#: templates/registration/admin_approve_email.html:11
-#, python-format
-msgid ""
-"\n"
-"    The following user (%(user)s) has asked to register an account at\n"
-"    %(site_name)s.\n"
-"    "
-msgstr ""
-
-#: templates/registration/admin_approve_email.html:17
-msgid ""
-"\n"
-"    To approve this, please\n"
-"    "
-msgstr ""
-
-#: templates/registration/admin_approve_email.html:20
-msgid "click here"
-msgstr ""
-
-#: templates/registration/admin_approve_email.txt:2
-#, python-format
-msgid ""
-"\n"
-"The following user (%(user)s) has asked to register an account at\n"
-"%(site_name)s.\n"
-msgstr ""
-
-#: templates/registration/admin_approve_email.txt:6
-msgid ""
-"\n"
-"To approve this, please click the following link.\n"
-msgstr ""
-
-#: templates/registration/admin_approve_email_subject.txt:1
-msgid "Account approval on"
-msgstr ""
-
-#: templates/registration/login.html:4 templates/registration/login.html:10
-msgid "Log in"
-msgstr "登录"
-
-msgid "Log In"
-msgstr "登录"
-
-
-#: templates/registration/login.html:14
-msgid "Forgot your password?"
-msgstr "忘记密码？"
-
-#: templates/registration/login.html:14
-msgid "Reset it"
-msgstr "重置"
-
-#: templates/registration/login.html:15
-msgid "Not a member?"
-msgstr "没有帐号？"
-
-#: templates/registration/login.html:15
-msgid "Register"
-msgstr "注册"
-
-#: templates/registration/logout.html:4
-msgid "Logged out"
-msgstr "退出"
-
-#: templates/registration/logout.html:7
-msgid "Successfully logged out"
-msgstr "已注销"
-
-#: templates/registration/password_change_done.html:4
-#, fuzzy
-#| msgid "password (again)"
-msgid "Password changed"
-msgstr "密码已修改"
-
-#: templates/registration/password_change_done.html:7
-msgid "Password successfully changed!"
-msgstr "密码已修改"
-
-#: templates/registration/password_change_form.html:4
-#: templates/registration/password_change_form.html:10
-#, fuzzy
-#| msgid "password"
-msgid "Change password"
-msgstr "修改密码"
-
-#: templates/registration/password_reset_complete.html:4
 msgid "Password reset complete"
 msgstr "密码重置完成"
 
-#: templates/registration/password_reset_complete.html:8
 msgid "Your password has been reset!"
 msgstr "密码已重置"
 
-#: templates/registration/password_reset_complete.html:9
-#, python-format
-msgid "You may now <a href=\"%(login_url)s\">log in</a>"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:10
 msgid "Confirm password reset"
 msgstr "确认密码重置"
 
-#: templates/registration/password_reset_confirm.html:14
 msgid "Enter your new password below to reset your password:"
 msgstr "输入新密码："
 
-#: templates/registration/password_reset_confirm.html:18
-#, fuzzy
-#| msgid "password"
 msgid "Set password"
 msgstr "设置密码"
 
-#: templates/registration/password_reset_done.html:4
-#, fuzzy
-#| msgid "password"
 msgid "Password reset"
 msgstr "密码已重置"
 
-#: templates/registration/password_reset_done.html:8
-msgid ""
-"\n"
-"    We have sent you an email with a link to reset your password. Please "
-"check\n"
-"    your email and click the link to continue.\n"
-"    "
-msgstr ""
-
-#: templates/registration/password_reset_email.html:3
-msgid "Greetings"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:5
-#, python-format
-msgid ""
-"\n"
-"You are receiving this email because you (or someone pretending to be you)\n"
-"requested that your password be reset on the %(domain)s site. If you do not\n"
-"wish to reset your password, please ignore this message.\n"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:11
-msgid ""
-"\n"
-"To reset your password, please click the following link, or copy and paste "
-"it\n"
-"into your web browser:\n"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:20
-msgid "Your username, in case you've forgotten:"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:23
-msgid "Best regards"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:24
-msgid "Management"
-msgstr ""
-
-#: templates/registration/password_reset_form.html:4
-#: templates/registration/password_reset_form.html:15
-#, fuzzy
-#| msgid "password"
 msgid "Reset password"
 msgstr "重置密码"
 
-#: templates/registration/password_reset_form.html:8
+msgid "Registration is closed"
+msgstr "注册关闭"
+
+msgid "Activation email sent"
+msgstr "激活邮件已发送"
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "username"
+msgstr "用户名"
+
+msgid "email address"
+msgstr "Email 地址"
+
+msgid "Usernames can only contain letters, numbers and underscores"
+msgstr "用户名只能包含字母、数字和下划线"
+
+msgid "This username is already taken. Please choose another."
+msgstr "该用户名已被占用，请另选一个。"
+
+msgid "You must type the same password each time"
+msgstr "您必须输入两遍同样的密码"
+
+msgid "Successfully logged out"
+msgstr "已退出"
+
+#, python-format
 msgid ""
 "\n"
 "    Forgot your password? Enter your email in the form below and we'll send "
 "you instructions for creating a new one.\n"
 "    "
-msgstr ""
-
-#: templates/registration/registration_closed.html:4
-#, fuzzy
-#| msgid "registration profile"
-msgid "Registration is closed"
-msgstr "注册信息"
-
-#: templates/registration/registration_closed.html:7
-msgid "Sorry, but registration is closed at this moment. Come back later."
-msgstr ""
-
-#: templates/registration/registration_complete.html:4
-#, fuzzy
-#| msgid "activation key"
-msgid "Activation email sent"
-msgstr "激活密钥"
-
-#: templates/registration/registration_complete.html:7
-msgid "Please check your email to complete the registration process."
-msgstr ""
-
-#: templates/registration/registration_form.html:4
-msgid "Register for an account"
-msgstr "注册帐号"
-
-#: templates/registration/registration_form.html:10
-#: templates/registration/resend_activation_form.html:10
-msgid "Submit"
-msgstr "提交"
-
-#: templates/registration/resend_activation_complete.html:4
-msgid "Account Activation Resent"
-msgstr ""
-
-#: templates/registration/resend_activation_complete.html:8
-#, python-format
-msgid ""
-"\n"
-"  We have sent an email to %(email)s with further instructions.\n"
-"  "
-msgstr ""
-
-#: templates/registration/resend_activation_form.html:4
-msgid "Resend Activation Email"
-msgstr ""
-
-#~ msgid "username"
-#~ msgstr "用户名"
-
-#~ msgid "email address"
-#~ msgstr "Email 地址"
-
-#~ msgid "Usernames can only contain letters, numbers and underscores"
-#~ msgstr "用户名只能包含字母、数字和下划线"
-
-#~ msgid "This username is already taken. Please choose another."
-#~ msgstr "该用户名已被占用，请另选一个。"
-
-#~ msgid "You must type the same password each time"
-#~ msgstr "您必须输入两遍同样的密码"
+msgstr "\n忘记密码？请输入邮件地址："

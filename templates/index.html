@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}tsadmin{% endblock %}
+{% block title %}首页{% endblock %}
 
 {% block content %}
     <div class="panel panel-default">
@@ -12,7 +12,7 @@
                     </a></h1>
                     <small>
                         {{ article.last_modified_time|date }}
-                        (<a href="{{ article.get_slug_url }}" target="_blank">新窗口</a>)
+                        (<a href="{{ article.get_slug_url }}" target="_blank">新窗口打开</a>)
                     </small>
                 </div>
         {% endfor %}

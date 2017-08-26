@@ -10,15 +10,15 @@ class AccessoriesViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ConnectionViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Returns a list of all connections.
+    Remember to **filter** `protocol` if multi protocols used! 
 
-    Remember to **filter** protocol!
+    如果使用了多协议，请使用**过滤器**筛选`协议`！
 
-    Examples:
+    URL:
 
-    GET [/api/connection/?protocol=1](/api/connection/?protocol=1)
+    [/api/connection/?protocol=1](/api/connection/?protocol=1)
 
-    GET [/api/connection/?protocol=1&format=json](/api/connection/?protocol=1&format=json)
+    [/api/connection/?protocol=1&format=json](/api/connection/?protocol=1&format=json)
     """
     queryset = Connection.objects.all()
     serializer_class = ConnectionSerializer

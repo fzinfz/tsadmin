@@ -8,7 +8,7 @@ import random
 from django.db.utils import ProgrammingError
 from django.db.models import Max
 from django.conf import settings
-
+from django.utils.translation import ugettext as _
 
 def gen_passwd():
     return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 10))

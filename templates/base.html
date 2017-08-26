@@ -9,18 +9,18 @@
 
 {% block bootstrap3_extra_head %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+    <meta name="source-code" content="Powered by tsadmin">
 {% endblock %}
 
 {% block bootstrap3_content %}
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-static-top">
 
         <div class="container-fluid">
             {% block header %}
 
                 <div class="navbar-header">
-
 
                     <a href="{% url 'index' %}" class="navbar-brand">{% trans "Home" %}</a>
 
@@ -34,24 +34,27 @@
                         </button>
 
                         <p class="navbar-text">
-                            <a href="{% url 'profile' %}" class="navbar-link">用户信息</a>
+                            <a href="{% url 'profile' %}" class="navbar-link">{% trans 'User Info' %}</a>
                         </p>
 
                     {% else %}
-                        <a href="{% url 'registration_register' %}" class="btn navbar-btn">
-                            {% trans "Register" %}
-                        </a>
-                        <a href="{% url 'auth_login' %}" class="btn navbar-btn">
-                            {% trans "Log In" %}
-                        </a>
+                        <ul class="navbar-nav nav nav-pills">
+                            <li><a href="{% url 'registration_register' %}">
+                                {% trans "Register" %}
+                            </a></li>
+                            <li><a href="{% url 'auth_login' %}">
+                                {% trans "Log In" %}
+                            </a></li>
+                        </ul>
                     {% endif %}
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="nav navbar-nav">
                         {% if user.is_staff %}
-                            <li><a href="{% url 'admin:index' %}" target="_blank">后台管理</a></li>
-                            <li><a href="/api" target="_blank">API</a></li>
+                            <li><a href="{% url 'admin:index' %}" target="_blank">{% trans 'Site administration' %}</a></li>
+                            <li><a href="/api/connection/" target="_blank">API</a></li>
                         {% endif %}
                     </ul>
 
@@ -83,9 +86,8 @@
         {% endblock content %}
     </div>
 
-    <div id="footer">
-        {% block footer %}
-        {% endblock %}
-    </div>
+    {% block footer %}
+    {% endblock %}
+
 
 {% endblock %}
