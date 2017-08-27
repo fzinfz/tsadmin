@@ -12,7 +12,7 @@ class PageNumberPaginationDataOnly(PageNumberPagination):
 
 
 from django.views.generic import ListView, DetailView
-from .models import Post, Node, Connection
+from .models import Post, Node
 
 
 class PostPublicListView(ListView):
@@ -21,7 +21,7 @@ class PostPublicListView(ListView):
     template_name = 'index.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status__iexact='PUBLISHED', public=True)
+        queryset = super().get_queryset().filter(status__iexact='PUBLISHED', public=True, list=True)
         return queryset
 
 
@@ -39,8 +39,3 @@ class NodeListView(LoginRequiredMixin, ListView):
     model = Node
     paginate_by = 100
     template_name = 'profile.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(NodeListView, self).get_context_data(**kwargs)
-        context['introduction'] = Post.objects.filter(status__iexact='PUBLISHED', public=False)[0].body
-        return context

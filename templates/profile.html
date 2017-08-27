@@ -7,8 +7,14 @@
 {% block title %}用户信息{% endblock %}
 
 {% block content %}
-
     <div class="container">
+        <!--   <div class="alert alert-success alert-dismissible" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                       aria-hidden="true">&times;</span></button>
+               <strong>Tip:</strong> click to fold/unfold
+           </div>
+        -->
+
         {% non_public_posts as posts %}
         <div class="panel-group" id="accordion-posts">
             {% for post in posts %}
@@ -38,28 +44,29 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion-conn"
+                                <strong><a data-toggle="collapse" data-parent="#accordion-conn"
                                    href="#conn{{ forloop.parentloop.counter }}{{ forloop.counter }}">
                                     {{ node.domain_name }} - {{ node.location }} [{{ node.get_status_display }}]
                                     {% if user_connnections.count > 1 %} {{ conn }} {% endif %}
-                                </a>
+                                </a></strong>
                             </h4>
                         </div>
                         <div id="conn{{ forloop.parentloop.counter }}{{ forloop.counter }}"
                              class="panel-collapse collapse {% if forloop.first and forloop.parentloop.first %} in {% endif %} ">
                             <div class="panel-body">
-                                <p>{{ node | ss_qrcode:conn }}</p>
-                                {% with s=node|ss_qrcode:conn %}
+                                <p>{{ node | qrcode_str:conn }}</p>
+                                {% with s=node|qrcode_str:conn %}
                                     {% qr_from_text s size="m" %}
                                 {% endwith %}
-
                                 <p>
-                                    <button data-toggle="collapse" data-target="#more{{ forloop.parentloop.counter }}{{ forloop.counter }}">More
+                                    <button data-toggle="collapse"
+                                            data-target="#more{{ forloop.parentloop.counter }}{{ forloop.counter }}">
+                                        More
                                     </button>
                                 </p>
 
                                 <div id="more{{ forloop.parentloop.counter }}{{ forloop.counter }}" class="collapse">
-                                    {{ node | get_protocol:conn }}
+                                    {{ node | link_node_conn:conn }}
                                 </div>
                             </div>
                         </div>

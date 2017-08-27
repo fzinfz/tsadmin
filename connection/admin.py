@@ -5,13 +5,18 @@ from markdownx.admin import MarkdownxModelAdmin
 from markdownx.widgets import AdminMarkdownxWidget
 
 
+def mark_outdated(modeladmin, request, queryset):
+    queryset.update(status="OUTDATED")
+    mark_outdated.short_description = "Mark Outdated"
+
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['title', 'public', 'status', 'topped']
-    list_filter = ('public', 'status')
+    list_display = ['title', 'public', 'list', 'status', 'topped']
+    list_filter = ('public', 'list', 'status')
     formfield_overrides = {
         models.TextField: {'widget': AdminMarkdownxWidget},
     }
+    actions = [mark_outdated]
 
 
 class AccessoriesAdmin(admin.ModelAdmin):

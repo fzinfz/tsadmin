@@ -128,9 +128,10 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
     body = MarkdownxField()
-    status = models.CharField('文章状态', max_length=31, choices=(('DRAFT', '草稿'), ('PUBLISHED', '已发布')), default='DRAFT')
-    topped = models.BooleanField('置顶', default=False)
+    status = models.CharField('文章状态', max_length=31, choices=(('DRAFT', '草稿'), ('PUBLISHED', '已发布'), ('OUTDATED','过期')), default='DRAFT')
+    list = models.BooleanField('list', default=True)
     public = models.BooleanField('公开', default=False)
+    topped = models.BooleanField('置顶', default=False)
     created_time = models.DateTimeField('创建时间', auto_now_add=True)
     last_modified_time = models.DateTimeField('修改时间', auto_now=True)
 
