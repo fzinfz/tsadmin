@@ -12,7 +12,7 @@ def mark_outdated(modeladmin, request, queryset):
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['title', 'public', 'list', 'status', 'topped']
+    list_display = ['title', 'slug', 'public', 'list', 'status', 'topped']
     list_filter = ('public', 'list', 'status')
     formfield_overrides = {
         models.TextField: {'widget': AdminMarkdownxWidget},
@@ -23,7 +23,7 @@ class PostAdmin(admin.ModelAdmin):
 class AccessoriesAdmin(admin.ModelAdmin):
     list_display = ['value', 'catalog']
     list_filter = ('catalog',)
-    ordering = ['id']
+    ordering = ['-catalog','value']
 
 
 class ConnectionAdmin(admin.ModelAdmin):

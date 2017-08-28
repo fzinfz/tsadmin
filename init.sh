@@ -6,7 +6,8 @@
 ./manage.py compilemessages
 
 ./manage.py loaddata accessories
-./manage.py shell < ./scripts/init_data.shell.py
+./manage.py shell < ./scripts/init_data_post.shell.py
+./manage.py shell < ./scripts/init_data_method.shell.py
 
 echo -n "Do you want to create super user? [y/n] "
 read answer2

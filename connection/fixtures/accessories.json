@@ -30,29 +30,5 @@
     "catalog": "method",
     "value": "aes-256-cfb"
   }
-},
-{
-  "model": "connection.accessories",
-  "pk": 102,
-  "fields": {
-    "catalog": "method",
-    "value": "chacha20"
-  }
-},
-{
-  "model": "connection.accessories",
-  "pk": 103,
-  "fields": {
-    "catalog": "method",
-    "value": "aes-128-cfb"
-  }
-},
-{
-  "model": "connection.accessories",
-  "pk": 104,
-  "fields": {
-    "catalog": "method",
-    "value": "test"
-  }
 }
 ]

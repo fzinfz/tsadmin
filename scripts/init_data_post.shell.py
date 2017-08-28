@@ -1,5 +1,5 @@
 # Execute:
-# ./manage.py shell < ./scripts/init_data.shell.py
+# ./manage.py shell < ./scripts/init_data_post.shell.py
 
 from connection.models import Post
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,6 +7,7 @@ import requests
 
 url_post_body_2 = "https://raw.githubusercontent.com/wiki/fzinfz/tsadmin/template_shadowsocks.md"
 
+# when updating, only title/slug/body will be modified by default
 data = [
     {
         'id': 1,
@@ -37,11 +38,12 @@ defaults = {
 for d in data:
     try:
         p = Post.objects.get(id=d['id'])
-        print('Post %s: %s' % (str(p.id), p), end=" ==> ")
+        print('updating post %s: %s' % (str(p.id), p.slug), end=" ==> ")
         p.title = d['data']['title']
         p.slug = d['data']['slug']
         p.body = d['data']['body']
-        print(p)
+        print(p.slug)
         p.save()
     except ObjectDoesNotExist:
+        print('adding post %s: %s' % (str(d['id']), d['data']['title']), end=" ==> ")
         Post.objects.create(id=d['id'], **d['data'], **defaults)
