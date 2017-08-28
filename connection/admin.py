@@ -9,6 +9,7 @@ def mark_outdated(modeladmin, request, queryset):
     queryset.update(status="OUTDATED")
     mark_outdated.short_description = "Mark Outdated"
 
+
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     list_display = ['title', 'public', 'list', 'status', 'topped']
@@ -25,8 +26,27 @@ class AccessoriesAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Node)
-admin.site.register(Connection)
+class ConnectionAdmin(admin.ModelAdmin):
+    list_display = ['port', 'user', 'protocol', 'method', 'due_date']
+    list_filter = ('protocol', 'method')
+    ordering = ['port']
+
+
+class NodeAdmin(admin.ModelAdmin):
+    list_display = ['domain_name', 'location', 'status', 'traffic_rate', 'sort']
+    list_filter = ('status',)
+    ordering = ['sort']
+
+
+class CustomUserAdmin(UserAdmin):
+    def __init__(self, *args, **kwargs):
+        super(UserAdmin, self).__init__(*args, **kwargs)
+        UserAdmin.list_display = \
+            ['username', 'email', 'is_superuser', 'nickname', 'aff_code', 'aff_by']
+
+
+admin.site.register(User, CustomUserAdmin)
+admin.site.register(Node, NodeAdmin)
+admin.site.register(Connection, ConnectionAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Accessories, AccessoriesAdmin)

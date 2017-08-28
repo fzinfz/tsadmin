@@ -31,12 +31,19 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    nickname = models.CharField(max_length=64, verbose_name='Nickname', blank=True)
+    aff_code = models.CharField(max_length=64, verbose_name='Affiliate Code', unique=True, blank=True, null=True)
+    aff_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Affiliated By'
+    )
     reg_ip = models.GenericIPAddressField(verbose_name='注册IP', unpack_ipv4=True, null=True)
     last_login_ip = models.GenericIPAddressField(verbose_name='上次登录IP', unpack_ipv4=True, null=True)
     last_login_date = models.DateTimeField(verbose_name='上次登录时间', null=True, auto_now_add=True)
     this_login_ip = models.GenericIPAddressField(verbose_name='本次登录IP', unpack_ipv4=True, null=True)
     this_login_date = models.DateTimeField(verbose_name='本次登录时间', null=True, auto_now_add=True)
-
 
 class Node(models.Model):
     STATUS_CHOICES = (
@@ -111,6 +118,7 @@ class Connection(models.Model):
 
     port = models.PositiveSmallIntegerField(verbose_name='端口', default=get_usefull_port)
     passwd = models.CharField(verbose_name='端口密码', max_length=16, default=gen_passwd)
+    due_date = models.DateField(verbose_name='到期日',null=True, blank=True)
 
     class Meta:
         verbose_name = '连接'

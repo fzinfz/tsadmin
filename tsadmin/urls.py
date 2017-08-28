@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
-from connection.views import PostPublicListView,PostPublicDetailView,NodeListView
+from connection.views import *
 from django.conf import settings
 
 urlpatterns = [
@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^api/', include('api.urls')),
+    url(r'^users/', UserListView.as_view()),
 ]

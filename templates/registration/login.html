@@ -3,37 +3,50 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
+{% block bootstrap3_extra_head %}
+    {{ block.super }}
+    {% if user.is_authenticated %}
+        <meta http-equiv="refresh" content="2;url={% url 'profile' %}">
+    {% endif %}
+{% endblock %}
+
 {% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block content %}
+
     <div class="container">
-        <div class="panel panel-default col-md-4 col-md-offset-4">
-            <div class="panel-body">
+        {% if user.is_authenticated %}
+            {% trans "Logged in" %}
+        {% else %}
+            <div class="panel panel-default col-md-4 col-md-offset-4">
+                <div class="panel-body">
 
-                <form action="" method="post" class="form">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-                    {% buttons %}
-                        <button type="submit" class="btn btn-success">
-                            {% trans 'Log in' %}
-                        </button>
-                        <input type="hidden" name="next" value="{{ next }}"/>
-                    {% endbuttons %}
-                </form>
+                    <form action="" method="post" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-success">
+                                {% trans 'Log in' %}
+                            </button>
+                            <input type="hidden" name="next" value="{{ next }}"/>
+                        {% endbuttons %}
+                    </form>
 
-                <div class="my-pt">
-                    <p>{% trans "Not a member?" %}
-                        <a class="btn btn-primary" href="{% url 'registration_register' %}">{% trans "Register" %}</a>.
-                    </p>
+                    <div class="my-pt">
+                        <p>{% trans "Not a member?" %}
+                            <a class="btn btn-primary"
+                               href="{% url 'registration_register' %}">{% trans "Register" %}</a>.
+                        </p>
+                    </div>
+
+                    <div>
+                        {% trans "Forgot your password?" %}
+                        <a class="btn btn-default" href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>
+                    </div>
+
                 </div>
-
-                <div>
-                    {% trans "Forgot your password?" %}
-                    <a class="btn btn-default" href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>
-                </div>
-
             </div>
-        </div>
+        {% endif %}
     </div>
 
 {% endblock %}

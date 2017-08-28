@@ -12,7 +12,7 @@ class PageNumberPaginationDataOnly(PageNumberPagination):
 
 
 from django.views.generic import ListView, DetailView
-from .models import Post, Node
+from .models import Post, Node, User
 
 
 class PostPublicListView(ListView):
@@ -39,3 +39,7 @@ class NodeListView(LoginRequiredMixin, ListView):
     model = Node
     paginate_by = 100
     template_name = 'profile.html'
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
