@@ -39,7 +39,3 @@ class NodeListView(LoginRequiredMixin, ListView):
     model = Node
     paginate_by = 100
     template_name = 'profile.html'
-
-
-class UserListView(LoginRequiredMixin, ListView):
-    model = User

@@ -1,0 +1,58 @@
+[
+{
+  "model": "connection.accessories",
+  "pk": 1,
+  "fields": {
+    "catalog": "protocol",
+    "value": "Shadowsocks"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 2,
+  "fields": {
+    "catalog": "protocol",
+    "value": "ShadowsocksR"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 3,
+  "fields": {
+    "catalog": "protocol",
+    "value": "VMess"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 101,
+  "fields": {
+    "catalog": "method",
+    "value": "aes-256-cfb"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 102,
+  "fields": {
+    "catalog": "method",
+    "value": "chacha20"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 103,
+  "fields": {
+    "catalog": "method",
+    "value": "aes-128-cfb"
+  }
+},
+{
+  "model": "connection.accessories",
+  "pk": 104,
+  "fields": {
+    "catalog": "method",
+    "value": "test"
+  }
+}
+]

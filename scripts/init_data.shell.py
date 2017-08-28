@@ -1,0 +1,47 @@
+# Execute:
+# ./manage.py shell < ./scripts/init_data.shell.py
+
+from connection.models import Post
+from django.core.exceptions import ObjectDoesNotExist
+import requests
+
+url_post_body_2 = "https://raw.githubusercontent.com/wiki/fzinfz/tsadmin/template_shadowsocks.md"
+
+data = [
+    {
+        'id': 1,
+        'data': {
+            'title': "欢迎",
+            'slug': "welcome",
+            'body': "### 请[登录](/accounts/login/)",
+            'public': True
+        }
+    },
+    {
+        'id': 2,
+        'data': {
+            'title': "使用说明",
+            'slug': "instruction",
+            'body': requests.get(url_post_body_2).content,
+            'public': False
+        }
+    }
+]
+
+defaults = {
+    "status": "PUBLISHED",
+    "list": True,
+    "topped": True
+}
+
+for d in data:
+    try:
+        p = Post.objects.get(id=d['id'])
+        print('Post %s: %s' % (str(p.id), p), end=" ==> ")
+        p.title = d['data']['title']
+        p.slug = d['data']['slug']
+        p.body = d['data']['body']
+        print(p)
+        p.save()
+    except ObjectDoesNotExist:
+        Post.objects.create(id=d['id'], **d['data'], **defaults)
