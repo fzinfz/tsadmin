@@ -33,7 +33,7 @@ s = """
 print('updating Accessories(catalog="method")')
 for item in get_method_list(s):
     try:
-        m = Accessories.objects.get(catalog="method", value=item)
+        Accessories.objects.get(catalog="method", value=item)
     except ObjectDoesNotExist:
         Accessories.objects.create(catalog="method", value=item)
         print("New item added: " + item)

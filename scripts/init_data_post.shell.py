@@ -36,6 +36,9 @@ defaults = {
 }
 
 for d in data:
+    if d['id'] == 2:
+        print("adding/updating post 2 from: " + url_post_body_2)
+
     try:
         p = Post.objects.get(id=d['id'])
         print('updating post %s: %s' % (str(p.id), p.slug), end=" ==> ")

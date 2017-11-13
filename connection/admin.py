@@ -28,7 +28,7 @@ class AccessoriesAdmin(admin.ModelAdmin):
 
 class ConnectionAdmin(admin.ModelAdmin):
     list_display = ['port', 'user', 'protocol', 'method', 'due_date']
-    list_filter = ('protocol', 'method')
+    list_filter = ('protocol',)
     ordering = ['port']
 
 

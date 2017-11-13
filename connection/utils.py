@@ -2,7 +2,10 @@ import re
 
 
 def _extract_to_list(s):
-    '''called by get_method_list'''
+    '''
+    called by get_method_list()
+    e.g.: 'aes-{128|192|256}-gcm' => ['aes-128-gcm','aes-192-gcm','aes-256-gcm']
+    '''
     number_list = re.search("(?<={).*(?=})", s).group(0).split("|")
     return [re.sub('{.*}', n, s) for n in number_list]
 
