@@ -11,6 +11,6 @@ def conn_save(sender,  **kwargs):
     for node in Node.objects.all():
         try:
             rs = requests.get(node.webhook)
-            print(node.webhook + " response: ", rs.content)
+            print(">>> " + node.webhook + " response: ", rs.content)
         except:
             print("error: ", sys.exc_info()[0])

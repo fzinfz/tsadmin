@@ -112,7 +112,7 @@ class Connection(models.Model):
         Accessories,
         limit_choices_to={'catalog': 'method'},
         related_name='methods',
-        default=100, # pk in /init_db.json
+        default=101, # pk in /init_db.json
         on_delete=models.CASCADE,
         verbose_name="加密方式"
     )
@@ -122,6 +122,7 @@ class Connection(models.Model):
     due_date = models.DateField(verbose_name='到期日',null=True, blank=True)
 
     class Meta:
+        ordering = ['port']
         verbose_name = '连接'
         verbose_name_plural = verbose_name
 
