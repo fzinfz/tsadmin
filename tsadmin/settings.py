@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, distutils.util
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,10 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2x-b+sgqjes4$1v4_tqu9h826jg1nu!6@$%x)6s0kd-3&z((y2'
+SECRET_KEY = os.getenv('SECRET_KEY', default='2x-b+sgqjes4$1v4_tqu9h826jg1nu!6@$%x)6s0kd-3&z((y2')
+print('SECRET_KEY: ' + SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = distutils.util.strtobool(os.getenv('DEBUG', default='false'))
+print('DEBUG:' + str(DEBUG))
 
 ALLOWED_HOSTS = ['*']
 
@@ -143,4 +145,4 @@ DB_ACCESSORIES_CATALOGS = (
     ('protocol', '协议'),
 )
 
-REGISTRATION_OPEN = os.getenv("REGISTRATION_OPEN",False)
+REGISTRATION_OPEN = os.getenv("REGISTRATION_OPEN", False)

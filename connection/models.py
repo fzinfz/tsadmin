@@ -60,6 +60,7 @@ class Node(models.Model):
     location = models.CharField(max_length=127, verbose_name='节点地理位置')
     status = models.CharField(max_length=63, choices=STATUS_CHOICES, default='INIT', verbose_name='节点状态')
     traffic_rate = models.PositiveIntegerField(verbose_name='流量倍率百分比', help_text='100表示默认1倍', default=100)
+    webhook = models.CharField(max_length=127, verbose_name='Webhook', default="http://")
     sort = models.SmallIntegerField(verbose_name='排序', default=0, help_text='小的在前面')
     remark_for_admin = models.TextField('管理员备注', null=True, blank=True, default=None)
 

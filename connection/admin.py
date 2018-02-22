@@ -33,7 +33,7 @@ class ConnectionAdmin(admin.ModelAdmin):
 
 
 class NodeAdmin(admin.ModelAdmin):
-    list_display = ['domain_name', 'location', 'status', 'traffic_rate', 'sort']
+    list_display = ['domain_name', 'location', 'status', 'traffic_rate', 'webhook', 'sort']
     list_filter = ('status',)
     ordering = ['sort']
 
