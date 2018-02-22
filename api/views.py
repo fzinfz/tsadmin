@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from .serializers import *
-from rest_framework import filters
-
+from django_filters.rest_framework import DjangoFilterBackend
 
 class AccessoriesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Accessories.objects.all()
@@ -23,5 +22,5 @@ class ConnectionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Connection.objects.all()
     serializer_class = ConnectionSerializer
 
-    filter_backends = (filters.DjangoFilterBackend, )
+    filter_backends = (DjangoFilterBackend, )
     filter_fields = ('protocol',)

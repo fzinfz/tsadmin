@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^login/', auth_views.login, name='login'),
     url(r'^accounts/profile/', NodeListView.as_view(), name='profile'),
 
-    url(r'^admin/', include(admin.site.urls), name='admin'),
+    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^api/', include('api.urls')),
 ]

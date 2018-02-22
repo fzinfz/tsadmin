@@ -4,6 +4,7 @@
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py compilemessages
+./manage.py collectstatic
 
 ./manage.py loaddata accessories
 ./manage.py shell < ./scripts/init_data_post.shell.py

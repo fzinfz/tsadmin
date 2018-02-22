@@ -23,7 +23,7 @@ data = [
         'data': {
             'title': "使用说明",
             'slug': "instruction",
-            'body': requests.get(url_post_body_2).content,
+            'body': requests.get(url_post_body_2).content.decode('utf-8'),
             'public': False
         }
     }
